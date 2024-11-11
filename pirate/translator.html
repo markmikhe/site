@@ -1,0 +1,92 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pirate Translator</title>
+</head>
+<body style="background-color: #000000">
+
+<h1 style="background-color: #5B91BC; font-size: 50px; border: 2px solid powderblue; font-family: verdana; text-align:center;">Text Replacer</h1>
+<input type="text" id="userInput" placeholder="Type your text here...">
+<button id="replaceButton">Replace</button>
+
+<p id="output"></p>
+
+<script>
+// Define the words to replace and their replacements
+const replacements = [
+    { word: "hi", replacement: "ahoy" },
+    { word: "have", replacement: "ave" },
+    { word: "food", replacement: "grub" },
+    { word: "yes", replacement: "aye" },
+    { word: "stop", replacement: "heave to" },
+    { word: "toilet", replacement: "head" },
+    { word: "crew", replacement: "hands" },
+    { word: "worker", replacement: "hand" },
+    { word: "workers", replacement: "hands" },
+    { word: "toilets", replacement: "heads" },
+    { word: "hello", replacement: "ahoy" },
+    { word: "friend", replacement: "matey" },
+    { word: "friends", replacement: "mateys" },
+    { word: "boy", replacement: "lad" },
+    { word: "boys", replacement: "lads" },
+    { word: "rebellion", replacement: "mutiny" },
+    { word: "rebel", replacement: "mutiny" },
+    { word: "rebellions", replacement: "mutinies" },
+    { word: "my", replacement: "me" },
+    { word: "steal", replacement: "plunder" },
+    { word: "steals", replacement: "plunders" },
+    { word: "prank", replacement: "rig" },
+    { word: "pranks", replacement: "rigs" },
+    { word: "pranking", replacement: "rigging" },
+    { word: "you", replacement: "heave ye" },
+    { word: "your", replacement: "yer" },
+    { word: "yours", replacement: "yers" },
+    { word: "wow", replacement: "blimey" },
+    { word: "woah", replacement: "blimey" },
+    { word: "there", replacement: "thar" },
+    { word: "should", replacement: "best" },
+    { word: "room", replacement: "cabin" },
+    { word: "and", replacement: "an'" },
+    { word: "to", replacement: "t'" },
+    { word: "store", replacement: "market" },
+    { word: "Mr.", replacement: "cap'n" },
+    { word: "Mrs.", replacement: "Madam" },
+    { word: "Ms.", replacement: "Madam" },
+    { word: "of", replacement: "o" },
+    { word: "this", replacement: "dis" },
+    { word: "birds", replacement: "parrots" },
+    { word: "is", replacement: "be" },
+    { word: "for", replacement: "fer" },
+    { word: "very", replacement: "mighty" },
+    { word: "really", replacement: "mighty" },
+    { word: "big", replacement: "mighty" },
+    { word: "strong", replacement: "mighty" },  
+    { word: "question", replacement: "riddle" }, 
+    { word: "no", replacement: "nay" }, 
+];
+
+// Function to replace words based on predefined list and handle "ing" words
+function replaceWords() {
+    // Get the user input
+    let input = document.getElementById("userInput").value;
+
+    // Replace whole words from the replacements list
+    replacements.forEach(({ word, replacement }) => {
+        const regex = new RegExp(`(?<=^|\\W)${word}(?=\\W|$)`, 'gi');
+        input = input.replace(regex, replacement);
+    });
+
+    // Replace words ending with "ing" with "in"
+    input = input.replace(/\b(\w+)ing\b/gi, (match, prefix) => `${prefix}in'`);
+
+    // Display the result
+    document.getElementById("output").innerText = input;
+}
+
+// Attach the function to the button click event
+document.getElementById("replaceButton").addEventListener("click", replaceWords);
+</script>
+
+</body>
+</html>
